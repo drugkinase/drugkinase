@@ -1,0 +1,118 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> 
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title>network</title>
+  <meta name="description" content="For How to Build an Interactive Network Visualization.">
+  <meta name="author" content="Songying">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+ 	 <style>  
+		html { overflow-x:hidden; overflow-y:hidden;}  
+	</style>  
+  <!-- CSS concatenated and minified via ant build script-->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- end CSS-->
+
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script>
+  	$(function ($) {
+	    $('#iframe1', parent.document).text()
+	});
+	$(document).ready( function () {
+		var opt_combined = "<option value=\"data_CPI_" + parent.curId + "_combined_score.json\">Integrative Score</option>";
+		var opt_kiba = "<option value=\"data_CPI_" + parent.curId + "_kiba.json\">Kiba Score</option>";
+		var opt_DrugBank = "<option value=\"data_CPI_" + parent.curId + "_drugbank.json\">DrugBank Score</option>";
+		var opt_STITCH = "<option value=\"data_CPI_" + parent.curId + "_stitch.json\">STITCH Score</option>";
+		var opt_DTHybrid = "<option value=\"data_CPI_" + parent.curId + "_DTHybrid.json\">DTHybrid Score</option>";
+		var opt_KBMF = "<option value=\"data_CPI_" + parent.curId + "_kbmf.json\">KBMF Score</option>";
+		var opt_MinHash = "<option value=\"data_CPI_" + parent.curId + "_minhash.json\">MinHash Score</option>";
+		var opt_RLS = "<option value=\"data_CPI_" + parent.curId + "_RLS.json\">RLS Score</option>";
+		var opt_SVM = "<option value=\"data_CPI_" + parent.curId + "_svm.json\">SVM Score</option>";
+		$("#score_select").append(opt_combined);
+		$("#score_select").append(opt_kiba);
+		$("#score_select").append(opt_DrugBank);
+		$("#score_select").append(opt_STITCH);
+		$("#score_select").append(opt_DTHybrid);
+		$("#score_select").append(opt_KBMF);
+		$("#score_select").append(opt_MinHash);
+		$("#score_select").append(opt_RLS);
+		$("#score_select").append(opt_SVM);
+	});
+  </script>
+</head>
+
+<body>
+  <div id="container" class="container"">
+    <div id="controls" style="margin-top: 10px;">
+      <div id="score_selection" class="control" style="margin-left: 90px;" >
+        <table>
+	      	<tr>
+	      		<td style="padding-top: 5px;"><h4 id="p">Type</h4></td>
+	      		<td><select id="score_select"></select></td>
+	      	</tr>
+        </table>
+      </div>
+      <div id="filters" class="control" style="padding-top: 4px;">
+        <table>
+	      	<tr>
+	      		<td><h4>Filter</h4></td>
+	      		<td> <a id="all" class="active">All</a>
+			        <a id="top5">top 5</a>
+			        <a id="top10">top 10</a>
+			        <a id="top15">top 15</a></td>
+	      	</tr>
+        </table>
+      </div>
+      <div id="search_section" class="control">
+        <table>
+	      	<tr>
+	      		<td style="padding-top: 5px;"><h4>&nbsp;&nbsp;Search</h4></td>
+	      		<td><form id="search_form" action=""  method="post">
+          			<p class="search_title"><input type="text" class="text-input" id="search" value="" /></p>
+        			</form>
+        		</td>
+	      	</tr>
+        </table>
+      </div>
+    <div id="main" role="main" sty>
+      <div id="vis_cpi" style="text-align: center;"></div>
+    </div>
+  </div> <!--! end of #container -->
+
+
+  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+
+
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <script src="js/libs/coffee-script.js"></script>
+  <script src="js/libs/d3.v2.js"></script>
+  <script src="js/Tooltip.js"></script>
+  <script type="text/coffeescript" src="coffee/visCPI.coffee"></script>
+
+  <script> // Change UA-XXXXX-X to be your site's ID
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
+
+
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+  
+</body>
+</html>

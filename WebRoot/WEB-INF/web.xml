@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name></display-name>
+  <servlet>
+    <servlet-name>simpleSearch</servlet-name>
+    <servlet-class>cn.edu.fudan.admis.database.servlet.SimpleSearchServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is used for similar search</description>
+    <display-name>similar search</display-name>
+    <servlet-name>SimilarSearchServlet</servlet-name>
+    <servlet-class>cn.edu.fudan.admis.database.servlet.SimilarSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>simpleSearch</servlet-name>
+    <url-pattern>/simple_query</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SimilarSearchServlet</servlet-name>
+    <url-pattern>/similarSearch</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error/404.jsp</location>
+  </error-page>
+</web-app>

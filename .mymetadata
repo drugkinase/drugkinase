@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="drugkinase"
+  id="myeclipse.1433955168981"
+  context-root="/drugkinase"
+  j2ee-spec="6.0"
+  archive="drugkinase.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

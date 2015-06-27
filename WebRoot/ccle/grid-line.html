@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>sensitivity</title>
+	<link rel="icon" href="favicon.ico" mce_href="favicon.ico" type="image/x-icon">
+	<link rel="shortcut icon" href="favicon.ico" mce_href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+    <link href="../style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="lib/d3.js"></script>
+</head>
+
+<body>
+
+<script type="text/javascript">
+	var data = [];
+    var height = 500, 
+        width = 600, 
+        margin = 35;
+	var compareByScore = function(a, b) {return a.score < b.score ? -1 : 1;}//sort based on the score
+    var svg = d3.select("body").append("svg")
+            .attr("class", "axis")
+            .attr("width", width)
+            .attr("height", height);
+        
+	function load() {
+		d3.json("data/test.json", function(error, json){
+			data = data.concat(json);
+			//begin to render
+			render(data);
+		});
+	}
+	
+	function render(data) {
+		renderYAxis(data);
+		renderXAxis(data);
+		plotDot(data);
+	}
+	
+	function plotDot(data) {
+		svg.selectAll(".dot")
+			.data(data)
+	  	   .enter().append("circle")
+	    	.attr("class", "dot")
+	    	.attr("r", 3.5)
+	    	.attr("cx", function(d) {return d.rank})
+	    	.attr("cy", function(d) {return d.rank})
+	    	.style("fill", "#555")
+	}
+    
+    function renderYAxis(data){        
+        var axisLength = height - 2 * margin;
+        var maxScore = data[data.length - 1].score;
+        var scale = d3.scale.linear()
+                        .domain([maxScore, 0])
+                        .range([0, axisLength]);
+        var yAxis = d3.svg.axis()
+                .scale(scale)
+                .orient("left");
+        svg.append("g")       
+            .attr("class", "y-axis")
+            .attr("transform", function(){
+                return "translate(" + margin + "," + margin + ")";
+            })
+            .call(yAxis);
+        d3.selectAll("g.y-axis g.tick")
+            .append("line")
+                .classed("grid-line", true)
+                .attr("x1", 0)
+                .attr("y1", 0)
+                .attr("x2", width - 2 * margin) // <-F
+                .attr("y2", 0);
+    }   
+    
+    function renderXAxis(data){
+        var axisLength = width - 2 * margin;
+    
+        var scale = d3.scale.linear()
+                        .domain([0, data.length])
+                        .range([0, axisLength]);
+        
+        var xAxis = d3.svg.axis()
+                .scale(scale)
+                .orient("bottom");
+                
+        svg.append("g")       
+            .attr("class", "x-axis")
+            .attr("transform", function(){ // <-A
+                return "translate(" + margin + "," + (height - margin) + ")";
+            })
+            .call(xAxis);
+    }
+    
+    load();
+</script>
+<div class="container">
+
+</div>
+</body>
+
+</html>
